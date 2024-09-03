@@ -1,6 +1,18 @@
 import Image from "next/image";
 
 export default function Home() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const originalText = queryParams.get('code') || 'No query parameter found';
+  const key = queryParams.get('key') || 'No query parameter found';
+  function xorEncryptDecrypt(input, key) {
+    let output = '';
+    for (let i = 0; i < input.length; i++) {
+        output += String.fromCharCode(input.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return output;
+  }
+  const encrypted = xorEncryptDecrypt(originalText, key);
+  const decrypted = xorEncryptDecrypt(encrypted, key);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -8,6 +20,8 @@ export default function Home() {
           Get started by editing&nbsp;
           <code className="font-mono font-bold">app/page.tsx</code>
         </p>
+        <p>{encrypted}</p>
+        <p>{decrypted}</p>
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
           <a
             className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
