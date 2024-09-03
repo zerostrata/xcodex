@@ -1,18 +1,8 @@
 import Image from "next/image";
 
 export default function Home() {
-  const queryParams = new URLSearchParams(window.location.search);
-  const originalText = queryParams.get('code') || 'No query parameter found';
-  const key = queryParams.get('key') || 'No query parameter found';
-  function xorEncryptDecrypt(input, key) {
-    let output = '';
-    for (let i = 0; i < input.length; i++) {
-        output += String.fromCharCode(input.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-    }
-    return output;
-  }
-  const encrypted = xorEncryptDecrypt(originalText, key);
-  const decrypted = xorEncryptDecrypt(encrypted, key);
+  const encrypted = 'a';
+  const decrypted = 'b';
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
